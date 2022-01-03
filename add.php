@@ -1,6 +1,7 @@
 <?php
 include 'configs.php';
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = new mysqli($serverName, $username, $password, $dbName);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -9,8 +10,10 @@ include 'configs.php';
     if ($conn->query($sql) === FALSE) {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
+    mysqli_close($conn);
     header("location: index.php");
     exit();
+}
 ?>
 
 <html>
